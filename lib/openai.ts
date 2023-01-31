@@ -14,7 +14,7 @@ export const createCompletion = async (prompt: string) => {
     top_p: 1,
     frequency_penalty: 0,
     presence_penalty: 0,
-    max_tokens: 200,
+    max_tokens: 256,
     n: 1,
   });
 

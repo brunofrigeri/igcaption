@@ -10,9 +10,6 @@ import Spinner from "@/components/Spinner";
 import Choice from "@/components/Choice";
 import { GetStaticProps } from "next";
 
-const defaultPrompt = (promptDescription: string) =>
-  `Suggest two captions for a picture ${promptDescription}. Make sure it's below 20 characters. Make sure is funny and casual.`;
-
 export default function Home() {
   const [prompt, setPrompt] = useState<string>("");
   const [completions, setCompletions] = useState<string[]>([]);
@@ -24,7 +21,9 @@ export default function Home() {
     setGenerating(true);
     const response = await fetch("/api/generate", {
       method: "POST",
-      body: JSON.stringify({ prompt: defaultPrompt(prompt) }),
+      body: JSON.stringify({
+        prompt: t("prompt", { promptDescription: prompt }),
+      }),
     });
 
     const jsonRes = await response.json();

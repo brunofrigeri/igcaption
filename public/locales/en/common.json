@@ -3,5 +3,6 @@
     "placeholder": "e.g. at the beach with my family and friends.",
     "generated_captions": "Generated captions",
     "button": "Generate caption",
-    "clear": "Clear"
+    "clear": "Clear",
+    "prompt": "Suggest two captions for a picture {{promptDescription}}. Make sure it's below 20 characters. Make sure is funny and casual."
 }

@@ -3,5 +3,6 @@
     "placeholder": "e.g. na praia com minha familia e amigos.",
     "generated_captions": "Legendas geradas",
     "button": "Gerar legenda",
-    "clear": "Limpar"
+    "clear": "Limpar",
+    "prompt": "Sugira duas legendas para uma foto {{promptDescription}}. Se certifique de que possui menos de 40 caracteres."
 }
