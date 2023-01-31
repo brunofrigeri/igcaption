@@ -1,0 +1,7 @@
+{
+    "label": "Descreva sua foto (com riqueza de detalhes)",
+    "placeholder": "e.g. na praia com minha familia e amigos.",
+    "generated_captions": "Legendas geradas",
+    "button": "Gerar legenda",
+    "clear": "Limpar"
+}

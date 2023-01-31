@@ -1,11 +1,14 @@
 import Head from "next/head";
 import { useState } from "react";
 import { CreateCompletionResponseChoicesInner } from "openai";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ResizableTextArea from "@/components/ResizableTextArea";
 import Spinner from "@/components/Spinner";
 import Choice from "@/components/Choice";
+import { GetStaticProps } from "next";
 
 const defaultPrompt = (promptDescription: string) =>
   `Suggest two captions for a picture ${promptDescription}. Make sure it's below 20 characters. Make sure is funny and casual.`;
@@ -14,6 +17,8 @@ export default function Home() {
   const [prompt, setPrompt] = useState<string>("");
   const [completions, setCompletions] = useState<string[]>([]);
   const [generating, setGenerating] = useState<boolean>(false);
+
+  const { t } = useTranslation(["common", "header"]);
 
   const onSubmit = async () => {
     setGenerating(true);
@@ -53,23 +58,21 @@ export default function Home() {
       <Header />
       <main className="flex-grow w-full mx-auto max-w-3xl">
         <div className="flex flex-col w-full">
-          <p className="flex flex-row mt-4 font-semibold">
-            Describe your pic (with the greatest detail)
-          </p>
+          <p className="flex flex-row mt-4 font-semibold">{t("label")}</p>
           <ResizableTextArea
             value={prompt}
             setValue={setPrompt}
             className="resize-none my-4 border rounded p-4"
-            placeholder="e.g. at the beach with my family and friends."
+            placeholder={t("placeholder").toString()}
           />
           {completions.length > 0 && (
             <div className="my-4">
               <div className="flex flex-row justify-between">
                 <p className="flex flex-row font-semibold">
-                  Generated captions
+                  {t("generated_captions")}
                 </p>
 
-                <button onClick={onClear}>Clear</button>
+                <button onClick={onClear}>{t("clear")}</button>
               </div>
               {completions.map((completion) => (
                 <Choice key={completion} text={completion} />
@@ -81,7 +84,7 @@ export default function Home() {
             onClick={onSubmit}
             disabled={generating || !prompt}
           >
-            {generating ? <Spinner /> : <>Generate caption</>}
+            {generating ? <Spinner /> : <>{t("button")}</>}
           </button>
         </div>
       </main>
@@ -89,3 +92,13 @@ export default function Home() {
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: locale
+      ? {
+          ...(await serverSideTranslations(locale, ["common", "header"])),
+        }
+      : {},
+  };
+};
