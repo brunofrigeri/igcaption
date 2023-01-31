@@ -25,7 +25,7 @@ const ResizableTextArea: React.FC<ResizableTextAreaProps> = ({
     <textarea
       ref={resizableTextAreaRef}
       placeholder={placeholder}
-      className={className + " resize-none"}
+      className={className + " resize-none overflow-hidden"}
       value={value}
       onChange={(event) => setValue(event.currentTarget.value)}
       maxLength={200}
